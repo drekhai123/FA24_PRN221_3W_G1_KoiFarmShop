@@ -12,27 +12,23 @@ namespace KoiFarmShop.RazorWebApp.Pages.KoiFarms
 {
     public class IndexModel : PageModel
     {
-        //private readonly KoiFarmShop.Repositories.Models.FA24_PRN221_3W_G1_KoiFarmShopContext _context;
-        //public IndexModel(KoiFarmShop.Repositories.Models.FA24_PRN221_3W_G1_KoiFarmShopContext context)
-        //{
-        //    _context = context;
-        //}
         private readonly KoiFarmService _koiFarmService;
-
-        public IndexModel(KoiFarmService koiFarmService)
+        private readonly AccountService _accountService;
+        public IndexModel(KoiFarmService koiFarmService, AccountService accountService)
         {
             _koiFarmService = koiFarmService;
+            _accountService = accountService;
         }
+
         public IList<KoiFarm> KoiFarm { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            KoiFarm = await _koiFarmService.GetAll();
-        }
+            //KoiFarm = await _context.KoiFarms
+            //    .Include(k => k.Owner).ToListAsync();
 
-        //public async Task OnGetAsync()
-        //{
-        //    KoiFarm = await _context.KoiFarms.ToListAsync();
-        //}
+            KoiFarm = await _koiFarmService.GetAll();
+            
+        }
     }
 }
