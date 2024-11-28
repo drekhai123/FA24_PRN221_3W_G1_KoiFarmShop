@@ -7,9 +7,9 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class KoiQualification
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
-    public long? KoiId { get; set; }
+    public int? KoiId { get; set; }
 
     public string Name { get; set; }
 

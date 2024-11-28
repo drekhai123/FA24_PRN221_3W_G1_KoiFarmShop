@@ -7,7 +7,7 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class KoiFarm
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     public string Name { get; set; }
 
@@ -17,7 +17,7 @@ public partial class KoiFarm
 
     public string Description { get; set; }
 
-    public long? OwnerId { get; set; }
+    public int? OwnerId { get; set; }
 
     public string Email { get; set; }
 
@@ -30,4 +30,6 @@ public partial class KoiFarm
     public string Status { get; set; }
 
     public virtual ICollection<Koi> Kois { get; set; } = new List<Koi>();
+
+    public virtual Account Owner { get; set; }
 }

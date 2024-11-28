@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<KoiFarmService>();
-
+builder.Services.AddScoped<AccountService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

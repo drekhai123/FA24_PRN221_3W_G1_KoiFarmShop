@@ -47,22 +47,15 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
-
-
-    // TODO: replace your connection string here to parse to appsettings.json
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=FA24_PRN221_3W_G1_KoiFarmShop;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Account__3214EC076D738D4C");
+            entity.HasKey(e => e.Id).HasName("PK__Account__3214EC07A920E993");
 
             entity.ToTable("Account");
 
-            entity.HasIndex(e => e.Id, "UQ__Account__3214EC068CB441F5").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Account__3214EC06F2F6E6AF").IsUnique();
 
             entity.Property(e => e.AccountName).HasMaxLength(255);
             entity.Property(e => e.Address).HasMaxLength(255);
@@ -75,16 +68,17 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Consignment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Consignm__3214EC07782AA100");
+            entity.HasKey(e => e.Id).HasName("PK__Consignm__3214EC071DEFEE35");
 
             entity.ToTable("Consignment");
 
-            entity.HasIndex(e => e.Id, "UQ__Consignm__3214EC0693475389").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Consignm__3214EC06FB9E86E0").IsUnique();
 
             entity.Property(e => e.ConsignPaymentMethod).HasMaxLength(255);
             entity.Property(e => e.ConsignPaymentStatus).HasMaxLength(255);
             entity.Property(e => e.ConsignmentStartDate).HasColumnType("datetime");
             entity.Property(e => e.ConsignmentStatus).HasMaxLength(255);
+            entity.Property(e => e.ConsignmentType).HasMaxLength(255);
 
             entity.HasOne(d => d.Account).WithMany(p => p.Consignments)
                 .HasForeignKey(d => d.AccountId)
@@ -97,12 +91,13 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Koi>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Koi__3214EC0747123D2E");
+            entity.HasKey(e => e.Id).HasName("PK__Koi__3214EC07ED6F9941");
 
             entity.ToTable("Koi");
 
-            entity.HasIndex(e => e.Id, "UQ__Koi__3214EC0683013EA1").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Koi__3214EC068FA35A6E").IsUnique();
 
+            entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.Image).HasMaxLength(255);
             entity.Property(e => e.Name).HasMaxLength(255);
             entity.Property(e => e.Origin).HasMaxLength(255);
@@ -120,11 +115,11 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<KoiFarm>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__KoiFarm__3214EC07C451651E");
+            entity.HasKey(e => e.Id).HasName("PK__KoiFarm__3214EC079F360A91");
 
             entity.ToTable("KoiFarm");
 
-            entity.HasIndex(e => e.Id, "UQ__KoiFarm__3214EC0686034993").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__KoiFarm__3214EC066D6AD14C").IsUnique();
 
             entity.Property(e => e.AwardImage).HasMaxLength(255);
             entity.Property(e => e.Description).HasMaxLength(255);
@@ -135,15 +130,19 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
             entity.Property(e => e.PhoneNumber).HasMaxLength(255);
             entity.Property(e => e.Status).HasMaxLength(255);
             entity.Property(e => e.Website).HasMaxLength(255);
+
+            entity.HasOne(d => d.Owner).WithMany(p => p.KoiFarms)
+                .HasForeignKey(d => d.OwnerId)
+                .HasConstraintName("FK__KoiFarm__OwnerId__412EB0B6");
         });
 
         modelBuilder.Entity<KoiQualification>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__KoiQuali__3214EC07E1FB41CD");
+            entity.HasKey(e => e.Id).HasName("PK__KoiQuali__3214EC07B57FB021");
 
             entity.ToTable("KoiQualification");
 
-            entity.HasIndex(e => e.Id, "UQ__KoiQuali__3214EC0626591BC5").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__KoiQuali__3214EC062573CD88").IsUnique();
 
             entity.Property(e => e.CreateAt).HasColumnType("datetime");
             entity.Property(e => e.Description).HasMaxLength(255);
@@ -162,11 +161,11 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order__3214EC07708BF0FC");
+            entity.HasKey(e => e.Id).HasName("PK__Order__3214EC07524E7736");
 
             entity.ToTable("Order");
 
-            entity.HasIndex(e => e.Id, "UQ__Order__3214EC06E61B2D3D").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Order__3214EC06EED966DD").IsUnique();
 
             entity.Property(e => e.CreateAt).HasColumnType("datetime");
             entity.Property(e => e.CustomerName).HasMaxLength(255);
@@ -184,11 +183,11 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__OrderDet__3214EC07A5E58818");
+            entity.HasKey(e => e.Id).HasName("PK__OrderDet__3214EC070A3FDE9F");
 
             entity.ToTable("OrderDetail");
 
-            entity.HasIndex(e => e.Id, "UQ__OrderDet__3214EC06B5C0F543").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__OrderDet__3214EC062754BAAB").IsUnique();
 
             entity.HasOne(d => d.Koi).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.KoiId)
@@ -201,11 +200,11 @@ public partial class FA24_PRN221_3W_G1_KoiFarmShopContext : DbContext
 
         modelBuilder.Entity<Promotion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Promotio__3214EC07399FEC09");
+            entity.HasKey(e => e.Id).HasName("PK__Promotio__3214EC075AD51776");
 
             entity.ToTable("Promotion");
 
-            entity.HasIndex(e => e.Id, "UQ__Promotio__3214EC06520BFA61").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Promotio__3214EC061BE36F36").IsUnique();
 
             entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.EndDate).HasColumnType("datetime");

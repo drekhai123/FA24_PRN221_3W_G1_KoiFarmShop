@@ -7,11 +7,11 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class Koi
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
-    public long? FarmId { get; set; }
+    public int? FarmId { get; set; }
 
-    public long? PromotionId { get; set; }
+    public int? PromotionId { get; set; }
 
     public string Specie { get; set; }
 
@@ -29,7 +29,7 @@ public partial class Koi
 
     public double? Price { get; set; }
 
-    public double? Description { get; set; }
+    public string Description { get; set; }
 
     public string Image { get; set; }
 

@@ -10,7 +10,7 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<table id="idTable" class="table">
     <thead>
         <tr>
             <th>
@@ -26,9 +26,6 @@
                 @Html.DisplayNameFor(model => model.KoiFarm[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KoiFarm[0].OwnerId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.KoiFarm[0].Email)
             </th>
             <th>
@@ -42,6 +39,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.KoiFarm[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KoiFarm[0].Owner)
             </th>
             <th></th>
         </tr>
@@ -62,9 +62,6 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OwnerId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
@@ -80,6 +77,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Owner.FullName)
+            </td>
+            <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -88,3 +88,12 @@
 }
     </tbody>
 </table>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/table-pagination.js"></script>
+<script>
+    $("#idTable").createTablePagination({
+
+        rowPerPage: 2,
+    });
+</script>

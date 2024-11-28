@@ -7,9 +7,9 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class Order
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
-    public long? AccountId { get; set; }
+    public int? AccountId { get; set; }
 
     public string CustomerName { get; set; }
 
