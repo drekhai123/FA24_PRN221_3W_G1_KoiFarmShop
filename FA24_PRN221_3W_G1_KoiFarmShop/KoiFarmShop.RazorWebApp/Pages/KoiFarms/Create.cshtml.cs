@@ -6,20 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiFarmShop.Repositories.Models;
+using KoiFarmShop.Services;
 
 namespace KoiFarmShop.RazorWebApp.Pages.KoiFarms
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiFarmShop.Repositories.Models.FA24_PRN221_3W_G1_KoiFarmShopContext _context;
+        //private readonly KoiFarmShop.Repositories.Models.FA24_PRN221_3W_G1_KoiFarmShopContext _context;
 
-        public CreateModel(KoiFarmShop.Repositories.Models.FA24_PRN221_3W_G1_KoiFarmShopContext context)
+        //public CreateModel(KoiFarmShop.Repositories.Models.FA24_PRN221_3W_G1_KoiFarmShopContext context)
+        //{
+        //    _context = context;
+        //}
+        private readonly KoiFarmService _koiFarmService;
+        private readonly AccountService _accountService;
+        public CreateModel(KoiFarmService koiFarmService, AccountService accountService)
         {
-            _context = context;
+            _koiFarmService = koiFarmService;
+            _accountService = accountService;
         }
-
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+        ViewData["OwnerId"] = new SelectList(await _accountService.GetAll(), "Id", "FullName");
             return Page();
         }
 
@@ -34,9 +42,10 @@ namespace KoiFarmShop.RazorWebApp.Pages.KoiFarms
                 return Page();
             }
 
-            _context.KoiFarms.Add(KoiFarm);
-            await _context.SaveChangesAsync();
-
+            
+            //_context.KoiFarms.Add(KoiFarm);
+            //await _context.SaveChangesAsync();
+            _koiFarmService.Create(KoiFarm);
             return RedirectToPage("./Index");
         }
     }
