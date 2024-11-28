@@ -7,7 +7,7 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class Account
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     public string AccountName { get; set; }
 
@@ -28,6 +28,8 @@ public partial class Account
     public int? PointBalance { get; set; }
 
     public virtual ICollection<Consignment> Consignments { get; set; } = new List<Consignment>();
+
+    public virtual ICollection<KoiFarm> KoiFarms { get; set; } = new List<KoiFarm>();
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

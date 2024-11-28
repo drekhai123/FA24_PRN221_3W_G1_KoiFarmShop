@@ -7,11 +7,11 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class OrderDetail
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
-    public long? OrderId { get; set; }
+    public int? OrderId { get; set; }
 
-    public long? KoiId { get; set; }
+    public int? KoiId { get; set; }
 
     public virtual Koi Koi { get; set; }
 

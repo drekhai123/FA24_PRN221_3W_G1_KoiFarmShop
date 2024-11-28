@@ -7,7 +7,7 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class Promotion
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     public string PromotionName { get; set; }
 
@@ -21,7 +21,7 @@ public partial class Promotion
 
     public bool? IsActive { get; set; }
 
-    public long? MinimumOrderValue { get; set; }
+    public int? MinimumOrderValue { get; set; }
 
     public double? MaximumDiscountAmount { get; set; }
 

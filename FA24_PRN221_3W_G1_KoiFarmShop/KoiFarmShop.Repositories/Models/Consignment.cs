@@ -7,15 +7,15 @@ namespace KoiFarmShop.Repositories.Models;
 
 public partial class Consignment
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
-    public long? KoiId { get; set; }
+    public int? KoiId { get; set; }
 
-    public long? AccountId { get; set; }
+    public int? AccountId { get; set; }
 
-    public long? ConsignmentType { get; set; }
+    public string ConsignmentType { get; set; }
 
-    public long? ConsignmentDuration { get; set; }
+    public int? ConsignmentDuration { get; set; }
 
     public DateTime? ConsignmentStartDate { get; set; }
 
@@ -27,7 +27,7 @@ public partial class Consignment
 
     public double? ConsignOverdueFee { get; set; }
 
-    public long? ConsignOverdueDuration { get; set; }
+    public int? ConsignOverdueDuration { get; set; }
 
     public virtual Account Account { get; set; }
 
