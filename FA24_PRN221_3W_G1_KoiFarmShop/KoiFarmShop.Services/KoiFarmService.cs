@@ -27,7 +27,7 @@ namespace KoiFarmShop.Services
             return await _repository.CreateAsync(koiFarm);
         }
 
-        public async Task<KoiFarm> GetById(string id)
+        public async Task<KoiFarm> GetById(int id)
         {
             return await _repository.GetByIdAsync(id);
         }
