@@ -32,7 +32,7 @@ namespace KoiFarmShop.Repositories
         }
         public async Task<KoiFarm> GetByIdAsync(int id)
         {
-            var koiFarm = await _context.KoiFarms.FindAsync(id);
+            var koiFarm = await _context.KoiFarms.Include(o => o.Owner).FirstOrDefaultAsync(k => k.Id == id);
             return koiFarm;
         }
     }
